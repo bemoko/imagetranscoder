@@ -211,29 +211,6 @@ class ImageTranscoder extends AbstractPlugin {
       BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB
   }
   
-  /**
-   * Blur an image
-   */
-  def blur(imageIn) {
-    ConvolveOp convolve = new ConvolveOp(blurKernel, ConvolveOp.EDGE_NO_OP,null);
-    def imageOut=new BufferedImage(imageIn.width, imageIn.height, getType(imageIn))
-    convolve.filter(imageIn, imageOut);
-    return imageOut
-  }
-  
-  /**
-   * Blur kernel to define how blur should be applied
-   */
-  @Lazy blurKernel = {
-    def middle=0.1
-    def edge=0.05
-    def corner=(1-middle-4*edge)/4.0
-    L.debug("$middle : $edge : $corner")
-    
-    new Kernel(3, 3, 
-      [ corner, edge, corner, edge, middle, edge, corner, middle, corner ] as float[]);    
-  }()
-  
   /*
    * Compress a URI
    */
