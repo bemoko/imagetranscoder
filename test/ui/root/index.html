@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>imagetranscoder plugin test</title>
+</head>
+<body>
+  <div id="body">
+    <div>
+      <img src="${content.transcoder.uri('100.jpeg','/snow.jpg')}" alt="snow"/>
+      <img src="${content.transcoder.uri('50x50.jpeg','/snow.jpg')}" alt="snow"/>
+      <img src="${content.transcoder.uri('100-crop100.jpeg','/snow.jpg')}" alt="snow"/>
+    </div>
+    <div>
+      <img src="${content.transcoder.uri(device.displayWidth + '.jpeg','/snow.jpg')}" alt="snow"/>
+    </div>
+    <div>
+      <img 
+      src="${content.transcoder.uri('100.jpeg','http://bemoko.com/bemoko/images/banner_logo.png')}"
+        alt="bemoko"/>
+    </div>
+  </div>
+</body>
+</html>

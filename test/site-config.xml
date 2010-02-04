@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    imagetranscoder plugin test site configuration file
+ -->
+<site>
+  <content-sources>
+    <source name="transcoder" plugin="imagetranscoder.ImageTranscoder" scope="site"/>
+  </content-sources>
+
+  <!-- 
+      Intent configuration 
+    -->
+  <intents>
+    <intent name="i" type="template" view="test.html"/>  
+    <!-- transcode renderer intent -->
+    <intent name="t" type="renderer">
+      <renderer plugin="imagetranscoder.ImageTranscodeRenderer"/>
+    </intent>
+  </intents>
+  
+</site>

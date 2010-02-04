@@ -1,0 +1,56 @@
+Background
+-------------------------------------------------------------------------------
+
+bemokoLive plugin that resizes images
+
+
+Installation
+-------------------------------------------------------------------------------
+
+* Drop the following in the plugins folder of your site
+
+  imagetranscoder/ImageTranscoder.groovy
+  imagetranscoder/ImageTranscodeRenderer.groovy
+
+Usage
+-------------------------------------------------------------------------------
+
+Define content source in your bemoko site
+
+  <content-sources>
+    <source name="transcoder" plugin="imagetranscoder.ImageTranscoder" scope="site"/>
+  </content-sources>
+
+along with the transcode renderer
+
+  <intents>
+    <intent name="t" type="renderer">
+      <renderer plugin="imagetranscoder.ImageTranscodeRenderer"/>
+    </intent>
+  </intents>
+
+In your template include URLs to transcoded image with the 
+"content.transcoder.uri" method, e.g.
+
+  <img src="${content.transcoder.uri('100.jpeg','/snow.jpg')}" alt="snow"/>
+  <img src="${content.transcoder.uri('100.jpeg','http://be/snow.jpg')}" alt="snow"/>
+
+where the first argument is the rule specifying how to transcode and the 
+second argument is the absolute URL of the image or site relative URL.
+
+Supported rules are
+
+  * nnn.jpeg           -> resize to nnn pixels wide
+  * nnnxmmm.jpeg       -> resize to nnn pixels wide and mmm pixels high
+  * cropnnn            -> crop to nnn pixels wide
+  * nnn-cropmmm.jpeg   -> resize to nnn pixels wide and then crop to mmm pixels 
+                          high
+                          
+You can use device capabilities to resize, e.g. resize to width of device 
+with
+
+  <img src="${content.transcoder.uri(device.displayWidth + '.jpeg','/snow.jpg')}" alt="snow"/>
+
+                          
+
+
