@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!--
+      imagetranscoder site configuration
+    -->
+<site>
+  <!--
+      Configuration for the imagetranscoder plugin
+    -->
+  <config>
+    <source file="imagetranscoder.cfg"/>
+  </config>
+</site>

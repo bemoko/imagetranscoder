@@ -15,8 +15,6 @@
  */
 package imagetranscoder
 
-import com.bemoko.live.platform.mwc.plugins.AbstractPlugin
-
 import java.awt.geom.AffineTransform
 import java.awt.image.AffineTransformOp
 import java.awt.Graphics2D
@@ -26,10 +24,11 @@ import java.awt.RenderingHints
 import java.awt.image.ConvolveOp
 import java.awt.image.Kernel
 
+import com.bemoko.live.platform.Bemoko
 /*
  * Image Transcoder
  */
-class ImageTranscoder extends AbstractPlugin {  
+class ImageTranscoder {  
 
   /*
    * Progressive downscaling is slower but better.  This comes into play
@@ -38,13 +37,6 @@ class ImageTranscoder extends AbstractPlugin {
   private static PROGRESSIVE_DOWNSCALING=true
   private static PROGRESSIVE_DOWNSCALING_FACTOR=2
   private static COMPRESSION_PREPEND_KEY="b-"
-  
-  /*
-   * URI compression rules to shorten URLs.
-   */
-  def uriCompressionRules =  [
-     "http":"http://"
-   ]
       
   def rules = { image, rule ->
     switch (rule) {
@@ -76,7 +68,7 @@ class ImageTranscoder extends AbstractPlugin {
    */
   def uri(rule,uri) {
     "/t/rule/${rule}?uri=${compressUri(uri)}" + 
-      (platform.intent.reload ? "&reload=${platform.intent.reload}" : "")
+      (Bemoko.intent.reload ? "&reload=${Bemoko.intent.reload}" : "")
   }
   
   /*
@@ -216,7 +208,7 @@ class ImageTranscoder extends AbstractPlugin {
    */
   def compressUri(uri) {
     def compressedUri=uri
-    for (compressionRule in uriCompressionRules) {
+    for (compressionRule in Bemoko.config.transcoder.uriCompressionRules) {
       if (compressedUri.startsWith(compressionRule.value)) {
         compressedUri = COMPRESSION_PREPEND_KEY + compressionRule.key + "-" +    
           compressedUri.substring(compressionRule.value.length())
@@ -231,10 +223,10 @@ class ImageTranscoder extends AbstractPlugin {
    * Uncompress a URI
    */
   def uncompressUri(uri) {
-    def uncompressedUri=uri
+    def uncompressedUri = uri
     def m = (uri =~ /^b-([^-]*)-(.*)/)
     if (m.matches()) {
-      uncompressedUri=uriCompressionRules[m[0][1]] + m[0][2]
+      uncompressedUri = Bemoko.config.transcoder.uriCompressionRules[m[0][1]] + m[0][2]
     }
   }  
 }
