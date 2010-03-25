@@ -9,6 +9,7 @@ Installation
 
 * Drop the following in the plugins folder of your site
 
+  conf/imagetranscoder.cfg
   imagetranscoder/ImageTranscoder.groovy
   imagetranscoder/ImageTranscodeRenderer.groovy
 
@@ -21,6 +22,12 @@ Define content source in your bemoko site
     <source name="transcoder" plugin="imagetranscoder.ImageTranscoder" scope="site"/>
   </content-sources>
 
+register the imagetranscoder configuration file
+
+  <config>
+    <source file="imagetranscoder.cfg"/>
+  </config>
+  
 along with the transcode renderer
 
   <intents>
