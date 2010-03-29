@@ -7,11 +7,15 @@ bemokoLive plugin that resizes images
 Installation
 -------------------------------------------------------------------------------
 
-* Drop the following in the plugins folder of your site
+* Drop the following files into your site
 
   conf/imagetranscoder.cfg
-  imagetranscoder/ImageTranscoder.groovy
-  imagetranscoder/ImageTranscodeRenderer.groovy
+  plugins/imagetranscoder/ImageTranscoder.groovy
+  plugins/imagetranscoder/ImageTranscodeRenderer.groovy
+
+Note that you should maintain this folder structure, i.e. put conf/imagetranscoder.cfg
+in a folder called "conf" in you site directory and put
+plugins/imagetranscoder/ImageTranscoder.groovy in a folder called "plugins/imagetranscoder"
 
 Usage
 -------------------------------------------------------------------------------
